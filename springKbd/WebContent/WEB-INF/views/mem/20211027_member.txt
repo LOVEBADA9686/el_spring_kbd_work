@@ -1,0 +1,143 @@
+회원가입 :: Model 2 + Web MVC 패턴  
+=======================================
+
+0. datasource : 데이터소스
+----------------------
+conf/context.xml
+
+오라클 SID : Service Name 확인하기 
+---------------------------------
+sqlplus / as sysdba 또는 sqlplus "/as sysdba"
+SELECT NAME, DB_UNIQUE_NAME FROM V$DATABASE;
+
+
+요구사항
+------------------------
+ MNUM		회원번호 : M + YYYYMMDD + 0001 
+,MNAME		이름 : 
+,MID		영문 : 8자 
+,MPW		8자 
+,MGENDER	여자 : 01, 남자 : 02
+,MBIRTH		YYYY + MM + DD : YYYYMMDD
+,HHP		010 + XXXX + XXXX : 010-XXXX-XXXX
+,MTEL		02 + XXXX + XXXX : 02-XXXX-XXXX    
+,MEMAIL		XXX@XXX.COM
+,MZONECODE 	도로명 주소 우편번호 : 5자리, 지번주소 우편번호 : 6자리  
+,MROADADDRESS 	도로명 주소 + 도로명 주소 상세주소 
+,MGIBUNADDRESS	지번 주소 
+,MHOBBY		알고리즘 : 01, 코딩 : 02, 분설설계  : 03, 데이터베이스 : 04, 스크립트 : 05
+,MINFO		소개글 글자수 제한 300자
+,MPHOTO		사진 파일 이름만 : 사진 파일을 서버 폴더에 저장
+,MADMIN     비관리자 : 00, 관리자 : 01, 02, ....
+,DELETEYN	회원 : Y, 비회원 : N
+,INSERTDATE	YYYY-MM-DD
+,UPDATEDATE	YYYY-MM-DD
+
+
+회원 테이블
+----------------- 
+CREATE TABLE SPRING_MEMBER(
+     MNUM		VARCHAR2(20) PRIMARY KEY 
+    ,MNAME		VARCHAR2(20)
+    ,MID		VARCHAR2(20) NOT NULL
+    ,MPW		VARCHAR2(300) NOT NULL
+    ,MGENDER	VARCHAR2(2)
+    ,MBIRTH		VARCHAR2(10)
+    ,MHP		VARCHAR2(16)
+    ,MTEL		VARCHAR2(16)    
+    ,MEMAIL		VARCHAR2(200) NOT NULL
+    ,MZONECODE 	VARCHAR2(10) 
+    ,MROADADDRESS 	VARCHAR2(300)
+    ,MGIBUNADDRESS	VARCHAR2(300)
+    ,MHOBBY		VARCHAR2(200)
+    ,MINFO		VARCHAR2(300)
+    ,MPHOTO		VARCHAR2(200)
+    ,MADMIN		VARCHAR2(2) NOT NULL
+    ,DELETEYN	VARCHAR2(1) NOT NULL
+    ,INSERTDATE	DATE
+    ,UPDATEDATE	DATE
+);
+
+
+인넥스 확인 
+-- SYS_C0011181
+SELECT A.INDEX_NAME, A.COLUMN_NAME, A.TABLE_NAME
+FROM ALL_IND_COLUMNS A
+WHERE a.table_name IN ('MVC_MEMBER');
+
+채번 확인
+SELECT  /*+ INDEX_DESC(A SYS_C0011181) */
+        NVL(MAX(A.MNUM), 0) + 1 MAXNUM 
+FROM MVC_MEMBER A;
+
+
+클래스 설계 
+a.b.c.com.common
+	CommonUtils
+	GetChabun
+	GetMemberMaxNum
+
+
+a.b.c.com.mem
+a.b.c.com.mem.controller
+	SpringMemberController
+
+a.b.c.com.mem.service
+	SpringMemberService
+		public ArrayList<SpringMemberVO> memberSelectAll();
+		public ArrayList<SpringMemberVO> memberSelect(SpringMemberVO mvo);
+		public boolean memberInsert(SpringMemberVO mvo);
+		public boolean memberUpdate(SpringMemberVO mvo);
+		public boolean memberDelete(SpringMemberVO mvo);
+	SpringMemberServiceImpl
+
+a.b.c.com.mem.dao
+	SpringMemberDAO
+	SpringMemberDAOImpl
+
+a.b.c.com.mem.sql
+	SpringMemberSqlMap
+		public static String getMemberSelectAllQuery(){ return null;}
+		public static String getMemberSelectQuery(){ return null;}
+		public static String getMemberInsertQuery(){ return null;}
+		public static String getMemberUpdateQuery(){ return null;}
+		public static String getMemberdDeleteQuery(){ return null;}
+
+a.b.c.com.mem.vo
+	SpringMemberVO
+		private String mnum;
+		private String mname;
+		private String mid;
+		private String mpw;
+		private String mgender;
+		private String mbirth;
+		private String mhp;
+		private String mtel;
+		private String memail;
+		private String mzonecode;
+		private String mroadaddress;
+		private String mjibunaddress;
+		private String mhobby;				
+		private String mmemo;
+		private String mphoto;		
+		private String madmin;		
+		private String deleteyn;
+		private String insertdate;
+		private String updatedate;
+		
+		
+/mybatisconfig/mybatis-config.xml
+/mybatisquery/*.xml
+spring_member.xml		
+
+
+view : jsp 
+testKosmo/WebContent/WEB-INF/views/mem/
+springMem.html
+springMemSelectAll.jsp
+springMemSelect.jsp
+springMemInsert.jsp
+springMemUpdate.jsp
+springMemDelete.jsp
+
+
