@@ -10,7 +10,7 @@
 BOARD INSERT
 <hr>
 <script>
-	location.href="/springKbd/boardSelectAll.k";
+	location.href="/springKbd/boardSelectPaging.k";
 </script>
 
 </body>

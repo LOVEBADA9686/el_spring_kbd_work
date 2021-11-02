@@ -24,7 +24,7 @@ SELECT NAME, DB_UNIQUE_NAME FROM V$DATABASE;
 ,MEMAIL		XXX@XXX.COM
 ,MZONECODE 	도로명 주소 우편번호 : 5자리, 지번주소 우편번호 : 6자리  
 ,MROADADDRESS 	도로명 주소 + 도로명 주소 상세주소 
-,MGIBUNADDRESS	지번 주소 
+,MJIBUNADDRESS	지번 주소 
 ,MHOBBY		알고리즘 : 01, 코딩 : 02, 분설설계  : 03, 데이터베이스 : 04, 스크립트 : 05
 ,MINFO		소개글 글자수 제한 300자
 ,MPHOTO		사진 파일 이름만 : 사진 파일을 서버 폴더에 저장
@@ -140,4 +140,7 @@ springMemInsert.jsp
 springMemUpdate.jsp
 springMemDelete.jsp
 
-
+회원등록시 아이디 중복 체크시 동기 방식을 할때는 제이쿼리를 3버전으로 올린다!
+회원 등록 에서 id 중복 체크 할 때 jQuery CDN 사용법
+비동기 : 오리지널버전으로도 가능
+동기 : jQuery 3

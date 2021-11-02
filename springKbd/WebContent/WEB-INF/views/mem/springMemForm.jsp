@@ -16,8 +16,7 @@
 		// 이름 
 		
 		// 아이디 중복체크		
-		$("#midbtn").click(function(){		
-			alert("idCheck >>> : Ajax 배워서 할 예정임 ㅋ ");		
+		$("#midbtn").click(function(){				
 			console.log("idCheck >>> : ");
 			
 			let midVal = $("#mid").val();
@@ -27,6 +26,88 @@
 				return false;
 			}
 		});
+		/*
+		---------------------------
+		아이디 중복체크 Ajax 비동기 방식
+		---------------------------
+		$(document).on("click", "#midbtn", function(){
+			alert("midbtn >>> : ");
+			
+			let idCheckURL = "memIdCheck.k";
+			let reqType = "POST";
+			let dataParam = { mid: $("#mid").val(), };
+			
+			$.ajax({
+				url: idCheckURL,
+				type: reqType,
+				data: dataParam,
+				success: whenSuccess,
+				error: whenError
+			});
+			
+			function whenSuccess(resData){
+				if("ID_YES" == resData){
+					alert("아이디 사용가능 : ID_YES.");
+					
+					$("#mid").css('background-color', 'yellow');
+					$("#mid").attr("readonly", true);
+					$("#mpw").focus();
+				}else if ("ID_NO" == resData){
+					alert("이미 아이디 사용중 : ID_NO.");
+					$("#mid").val('');
+					$("#mid").focus();
+				};
+			}
+			function whenError(e){
+				alert("e >>> : " + e.responseText);
+			}
+		});
+		*/
+		
+		// 아이디 중복체크 Ajax 동기 방식
+		$(document).on("click", "#midbtn", function(){
+			alert("midbtn >>> : ");
+			syncIdCheckData();
+		});
+		
+		async function syncIdCheckData(){
+			
+			let idCheckData = '';
+			console.log('start >>> : ');
+			
+			var vv = $("#mid").val();
+			alert("vv >>> : " + vv);
+			
+			idCheckData = await ajaxIdCheckData(vv);
+			alert("리턴된 데이터 >>> : " + idCheckData);
+			
+			if("ID_YES" == idCheckData){
+				alert("아이디 사용가능 : ID_YES. ");
+				
+				$("#mid").attr("readonly", true);
+				$("#mid").css('background-color', 'yellow');
+				$("#mpw").focus();
+			}else if("ID_NO" == idCheckData){
+				alert("이미 아이디 사용중 : ID_NO. ");
+				$("#mid").val('');
+				$("#mid").focus();
+			};
+		}
+		
+		function ajaIdCheckData(myval){
+			alert("myval >>> : " + myval);
+			
+			let idCheckURL = "memIdCheck.k";
+			let resType = "POST";
+			let dataParam = { mid: myval, };
+			
+			return $.ajax({
+				url: idCheckURL
+				,type: reqType
+				,data: dataParam
+			});
+		}
+		// 아이디 중복 체크 끝 ================================================================
 		
 		// 비밀번호 체크 
 		$("#pwCheck").click(function(){
@@ -267,16 +348,13 @@
 			//############################################# END
 			
 			
-			let v1 = $("#ISUD_TYPE").val();
-			alert("v1 >>> : " + v1);
-			
 			$("#memForm")
 			.attr({
-					"action":"#/springKbd/mem?ISUD_TYPE="+v1,
-				    "method":"POST",
-				    "enctype":"multipart/form-data"
-			       })
-			.submit();	
+					"action":"memInsert.k",
+					"method":"POST",
+					"enctype":"multipart/form-data"
+			})
+			.submit();
 		});
 	});
 </script>	
@@ -300,19 +378,29 @@
 	<td>이름</td>
 	<td><input type="text" name="mname" id="mname"/></td>
 </tr>
+<div id="middiv">
 <tr>
 	<td>아이디</td>
 	<td>
+	<!--
 		<input type="text" name="mid" id="mid" placeholder="아이디체크" style="width:100px" />
+	-->
+		<input type="text" name="mid" id="mid" placeholder="아이디 체크" />
 		<input type="button" name="midbtn" id="midbtn" value="아이디중복확인"  />
 	</td>
 </tr>
+</div>
 <tr>
 	<td>패스워드</td>
 	<td>
+	<!-- 
 		<input type="text" name="mpw" id="mpw" style="width:100px" /><br/>
 		<input type="text" id="mpw_r" name="mpw_r" placeholder="비밀번호확인" style="width:100px" />
 		<input type="button" value="비밀번호확인" id="pwCheck"/><br/>
+	 -->
+	 	<input type="text" name="mpw" id="mpw" /><br/>
+	 	<input type="text" id="mpw_r" name="mpw_r" placeholder="비밀번호확인" />
+	 	<input type="button" value="비밀번호확인" id="pwCheck" /><br/>
 	</td>
 </tr>
 <tr>
@@ -405,11 +493,10 @@
     </td>
 </tr>
 <tr>
-	<td colspan="2"> 		
-		<input type="hidden" name="ISUD_TYPE" id="ISUD_TYPE" value="I">	
+	<td colspan="2"> 			
 		<button type="button" id="btn">보내기</button>
 		<button type="reset">다시 </button>	
-	</td>				
+	</td>			
 </tr>
 </table>				 		        		     
 </form>	

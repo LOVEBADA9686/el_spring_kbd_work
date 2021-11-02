@@ -12,7 +12,7 @@
 <style type="text/css">
 	
 	table, td{
-		board: 1px solid red;
+		border: 1px solid red;
 	}
 	table {
 		width: 70%;

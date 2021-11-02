@@ -50,7 +50,9 @@ public class SpringBoardController {
 		logger.info("BoardController boardInsert sbnum >>> : " + sbnum);
 		
 		// 이미지 업로드
-		FileUploadUtil fu = new FileUploadUtil();
+		FileUploadUtil fu = new FileUploadUtil(	CommonUtils.BOARD_IMG_UPLOAD_PATH
+												,CommonUtils.BOARD_IMG_FILE_SIZE
+												,CommonUtils.BOARD_EN_CODE);
 		// 이미지 파일 원본 사이즈
 		// boolean bool = fu.imgfileUpload(req);
 		// 이미지 파일 원본 사이즈 크기 조절 하기
@@ -105,13 +107,22 @@ public class SpringBoardController {
 		logger.info("SpringBoardController boardSelectPaging bvo.getCurPage() >>> : " + bvo.getCurPage());
 		logger.info("SpringBoardController boardSelectPaging bvo.getTotalCount() >>> : " + bvo.getTotalCount());
 		
+		SpringBoardVO.printVO(bvo);
+		
 		List<SpringBoardVO> listAll = springBoardService.boardSelectPaging(bvo);
 		logger.info("SpringBoardController boardSelectPaging listAll.size() >>> : " + listAll.size());;
 		
 		if(listAll.size() > 0) {
+//			for (int i=0; i < listAll.size(); i++) {
+//			SpringBoardVO sbvo = (SpringBoardVO)listAll.get(i);
+//			logger.info("listAll ::: bvo.getPageSize() >>> : " + sbvo.getPageSize());
+//			logger.info("listAll ::: bvo.getGroupSize() >>> : " + sbvo.getGroupSize());
+//			logger.info("listAll ::: bvo.getCurPage() >>> : " + sbvo.getCurPage());
+//			logger.info("listAll ::: bvo.getTotalCount() >>> : " + sbvo.getTotalCount());
+//		}
 			
-			model.addAttribute("pagingBvo", bvo);
-			model.addAttribute("listAll", listAll);
+			model.addAttribute("pagingBVO", bvo);
+			model.addAttribute("listAll", listAll);	
 			return "board/springBoardSelectPaging";			
 		}
 		

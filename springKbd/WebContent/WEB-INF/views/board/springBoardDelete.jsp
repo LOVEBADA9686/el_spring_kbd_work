@@ -10,7 +10,8 @@
 BOARD DELETE
 <hr>
 <script>
-	location.href="/springKbd/boardSelectAll.k";
+	location.href="/springKbd/boardSelectPaging.k";
+	//boardSelectAll
 </script>
 </body>
 </html>

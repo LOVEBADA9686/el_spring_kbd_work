@@ -2,11 +2,8 @@ package a.b.c.com.common;
 
 import java.util.ArrayList;
 import java.util.Enumeration;
-
 import javax.servlet.http.HttpServletRequest;
-
 import com.oreilly.servlet.MultipartRequest;
-
 
 public class FileUploadUtil {
 	
@@ -15,10 +12,10 @@ public class FileUploadUtil {
 	private String encodeType;
 	private MultipartRequest mr;
 	
-	public FileUploadUtil() {
-		this.imgfilePaths = CommonUtils.IMG_UPLOAD_PATH;
-		this.imgfileSize = CommonUtils.IMG_FILE_SIZE;
-		this.encodeType = CommonUtils.EN_CODE;		
+	public FileUploadUtil(String imgfilePaths, int imgfileSize, String encodeType) {
+		this.imgfilePaths = imgfilePaths;
+		this.imgfileSize = imgfileSize;
+		this.encodeType = encodeType;		
 	}
 	
 	public boolean imgfileUpload(HttpServletRequest req) {
@@ -61,6 +58,10 @@ public class FileUploadUtil {
 	
 	public String getParameter(String s) {
 		return mr.getParameter(s);
+	}
+	
+	public String[] getParameterValues(String s) {
+		return mr.getParameterValues(s);
 	}
 	
 	public String getFileName(String f) {

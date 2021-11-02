@@ -85,7 +85,6 @@ int groupSize = 0;
  		//boardSelectList.jsp?curPage=1
  		//boardSelectList.jsp?curPage=0	
 %>
-
 	<a href="<%=url%>?<%=str%>curPage=1">¢·¢·</a>&nbsp;&nbsp;&nbsp;
 	<a href="<%=url%>?<%=str%>curPage=<%=linkPage%>">¢¸</a>&nbsp;&nbsp;&nbsp;
 <%
@@ -93,7 +92,7 @@ int groupSize = 0;
  	else
  	{
 %> 
-	¢·¢·&nbsp;&nbsp;&nbsp¢¸&nbsp;&nbsp;&nbsp;
+	¢·¢·&nbsp;&nbsp;&nbsp;¢¸&nbsp;&nbsp;&nbsp;
 <%
  	}
 

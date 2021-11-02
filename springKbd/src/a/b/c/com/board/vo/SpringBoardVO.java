@@ -1,6 +1,9 @@
 package a.b.c.com.board.vo;
 
+import org.apache.log4j.Logger;
+
 public class SpringBoardVO {
+	private static Logger logger = Logger.getLogger(SpringBoardVO.class);
 	
 	private String sbnum ;
 	private String sbsubject;
@@ -224,6 +227,33 @@ public class SpringBoardVO {
 
 	public void setTotalCount(String totalCount) {
 		this.totalCount = totalCount;
+	}
+	
+	// 매개변수 확인
+	public static void printVO(SpringBoardVO bvo){
+		logger.info("SpringBoardVO 데이터 확인 시작  >>> : ");
+		
+		logger.info("글 번호 >>> : " + bvo.getSbnum());
+		logger.info("글 제목 >>> : " + bvo.getSbsubject());
+		logger.info("작성자 >>> : " + bvo.getSbname());
+		logger.info("글 내용 >>> : " + bvo.getSbcontent());
+		logger.info("첨부파일명 >>> : " + bvo.getSbfile());
+		logger.info("패스워드 >>> : " + bvo.getSbpw());
+		logger.info("삭제여부 >>> : " + bvo.getSbdelyn());
+		logger.info("입력일 >>> : " + bvo.getSbinsertdate());
+		logger.info("수정일 >>> : " + bvo.getSbupdatedate());
+		logger.info("페이징 데이터 확인 >>>");
+		logger.info("페이지 >>> : " + bvo.getPageSize());
+		logger.info("그룹사이즈 >>> : " + bvo.getGroupSize());
+		logger.info("현재페이지 >>> : " + bvo.getCurPage());
+		logger.info("전체건수 >>> : " + bvo.getTotalCount());
+		logger.info("조건검색 데이터 확인 >>>");
+		logger.info("검색 필터 >>> : " + bvo.getKeyfilter());
+		logger.info("검색 키워드 >>> : " + bvo.getKeyword());
+		logger.info("검색 시작일 >>> : " + bvo.getStartdate());
+		logger.info("검색 종료일 >>> : " + bvo.getEnddate());
+		
+		logger.info("SpringBoardVO 데이터 확인 끝 >>> : ");
 	}
 	
 }

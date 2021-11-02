@@ -17,7 +17,6 @@ public abstract class ThumnailImg {
 		System.out.println("uploadPath >>> : " + uploadPath);
 		System.out.println("filename >>> : " + filename);
 		File file = null;
-		
 		try {
 			ParameterBlock pb = new ParameterBlock();
 			pb.add(uploadPath + "\\" + filename);

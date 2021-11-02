@@ -34,6 +34,26 @@
 	                          SYSDATE)
 </insert>
 
+<select id="boardSelectPaging" parameterType="boardVO" resultType="boardVO">	
+	SELECT * FROM (
+		SELECT 	A.SBNUM 	SBNUM
+		       ,A.SBSUBJECT SBSUBJECT
+		       ,A.SBNAME 	SBNAME
+		       ,A.SBCONTENT SBCONTENT
+		       ,A.SBFILE 	SBFILE
+		       ,A.SBDELYN 	SBDELYN
+		       ,TO_CHAR(A.SBINSERTDATE, 'YYYY-MM-DD') SBINSERTDATE
+		       ,TO_CHAR(A.SBUPDATEDATE, 'YYYY-MM-DD') SBUPDATEDATE	  
+		       <!--  ? : 페이지 사이즈 : pageSize  -->
+		       ,CEIL(ROW_NUMBER() OVER(ORDER BY A.SBNUM)/ #{pageSize, jdbcType=VARCHAR} ) pageSize		
+			   ,COUNT(A.SBNUM) OVER() AS totalCount       
+		FROM 	SPRING_BOARD A
+		WHERE 	A.SBDELYN = 'Y' 	
+		ORDER BY 1 DESC  
+		<!--  ? : 현재 페이지 : curPage -->
+	) WHERE pageSize = #{curPage, jdbcType=VARCHAR}
+</select>
+
 <select id ="boardSelectAll" parameterType="boardVO" resultType="boardVO">
 	SELECT 	A.SBNUM 	SBNUM
 	       ,A.SBSUBJECT SBSUBJECT
@@ -65,7 +85,7 @@
 	<if test="keyfilter=='key5'">
 		<![CDATA[AND A.SBNUM LIKE '%' || #{keyword, jdbcType=VARCHAR} || '%']]>			
 	</if>
-	ORDER BY 1
+	ORDER BY 1 DESC
 </select>
 
 <select id="boardSelect" parameterType="boardVO" resultType="boardVO">

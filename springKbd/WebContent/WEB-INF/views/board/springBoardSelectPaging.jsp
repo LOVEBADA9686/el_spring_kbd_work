@@ -6,14 +6,14 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>게시판 목롤</title>
+<title>게시판 목록</title>
 <style type="text/css">
 	.tt{
 		text-align: center;
 		font-weight: bold;	
 	}
 </style>
-<link rel="stylesheet" href="/springHbe/common/datepiker/jquery-ui-1.12.1/jquery-ui.min.css">
+<link rel="stylesheet" href="/springKbd/common/datepiker/jquery-ui-1.12.1/jquery-ui.min.css">
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="/springKbd/common/datepiker/jquery-ui-1.12.1/jquery-ui.min.js"></script>
 <script type="text/javascript">
@@ -71,7 +71,8 @@
 				// I
 				$(document).on("click", "#I", function(){
 					//alert("I >>> : ");
-					location.href="springBoardForm.k";
+					location.href="boardForm.k";
+					//springBoardForm.k
 				});
 				
 				// U
@@ -99,7 +100,7 @@
 </script>
 </head>
 <body>
-<% request.setCharacterEncoding ("EUC-KR"); %>
+<% request.setCharacterEncoding("UTF-8");%> 
 <%
 
 	// 페이징 변수 세팅
@@ -108,7 +109,7 @@
 	int curPage = 0;
 	int totalCount = 0;
 	
-	Object objPaging = request.getAttribute("PagingBVO");
+	Object objPaging = request.getAttribute("pagingBVO");
 	SpringBoardVO pagingBVO = (SpringBoardVO)objPaging;
 
 	Object obj = request.getAttribute("listAll");
@@ -151,12 +152,15 @@
 </tr>
 </thead>
 <%
+
 for(int i=0; i<nCnt; i++){		
 	SpringBoardVO bvo = list.get(i);	
-	pageSize = Integer.parseInt(bvo.getPageSize());
+	
+	pageSize = Integer.parseInt(pagingBVO.getPageSize());
 	groupSize = Integer.parseInt(pagingBVO.getGroupSize());
 	curPage = Integer.parseInt(pagingBVO.getCurPage());
 	totalCount = Integer.parseInt(bvo.getTotalCount());
+
 	
 %>		
 <tbody>

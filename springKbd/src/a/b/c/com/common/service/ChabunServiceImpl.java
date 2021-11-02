@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import a.b.c.com.board.vo.SpringBoardVO;
 import a.b.c.com.common.dao.ChabunDAO;
+import a.b.c.com.mem.vo.SpringMemberVO;
 import a.b.c.com.rboard.vo.SpringRboardVO;
 
 @Service
@@ -24,12 +25,21 @@ public class ChabunServiceImpl implements ChabunService {
 	@Override
 	public SpringBoardVO getBoardChabun() {
 		// TODO Auto-generated method stub
+		logger.info("ChabunServiceImpl getBoardChabun >>> : ");
 		return chabunDAO.getBoardChabun();
 	}
 	
 	@Override
 	public SpringRboardVO getRboardChabun() {
 		// TODO Auto-generated method stub
+		logger.info("ChabunServiceImpl getRboardChabun >>> : ");
 		return chabunDAO.getRboardChabun();
+	}
+	
+	@Override
+	public SpringMemberVO getMemChabun() {
+		// TODO Auto-generated method stub
+		logger.info("ChabunServiceImpl getMemChabun >>> : ");
+		return chabunDAO.getMemChabun();
 	}
 }

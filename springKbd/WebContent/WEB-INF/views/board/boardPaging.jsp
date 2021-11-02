@@ -49,7 +49,7 @@ if(request.getParameter("groupSize") != null){
 
 if(request.getParameter("curPage") != null){
 	curPage = Integer.parseInt(request.getParameter("curPage")); //1
-	curPage = 2;
+	//curPage = 2;
 	System.out.println("curPage >>> : " + curPage);
 }
 
@@ -86,7 +86,7 @@ System.out.println("linkPage >>> : " + linkPage);
 <%
 	}else{
 %>
-		◁◁&nbsp;&nbsp;&nbsp◀&nbsp;&nbsp;&nbsp;
+		◁◁&nbsp;&nbsp;&nbsp;◀&nbsp;&nbsp;&nbsp;
 <%
 	}
 
@@ -104,12 +104,14 @@ System.out.println("linkPage >>> : " + linkPage);
 	while((loopCount > 0) && (linkPage <= pageCount)){
 		//1==1
 		if(linkPage == curPage){
+			System.out.println(linkPage + " == " + curPage);
 			System.out.println("그룹범위내에서 페이지 링크 if");
 			//linkPage : 1
 %>
 	 <%=linkPage%>
 <%
 		}else{
+			System.out.println(linkPage + " != " + curPage);
 			System.out.println("그룹범위내에서 페이지 링크else");
 			//[2][3][4][5]
 %>

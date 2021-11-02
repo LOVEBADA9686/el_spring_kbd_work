@@ -6,5 +6,6 @@
 	<typeAliases>
 		<typeAlias type="a.b.c.com.board.vo.SpringBoardVO" alias="boardVO"/>
 		<typeAlias type="a.b.c.com.rboard.vo.SpringRboardVO" alias="rboardVO" />
+		<typeAlias type="a.b.c.com.mem.vo.SpringMemberVO" alias="memberVO"/>
 	</typeAliases>
 </configuration>
