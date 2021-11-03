@@ -33,5 +33,6 @@
 	<classpathentry kind="lib" path="C:/00.KOSMO93/30.Web/el_spring_kbd_work/springKbd/WebContent/WEB-INF/lib/spring-webmvc-4.3.16.RELEASE.jar"/>
 	<classpathentry kind="lib" path="C:/00.KOSMO93/30.Web/el_spring_kbd_work/springKbd/WebContent/WEB-INF/lib/spring-websocket-4.3.16.RELEASE.jar"/>
 	<classpathentry kind="lib" path="C:/00.KOSMO93/30.Web/el_spring_kbd_work/springKbd/WebContent/WEB-INF/lib/standard.jar"/>
+	<classpathentry kind="lib" path="C:/00.KOSMO93/30.Web/el_spring_kbd_work/springKbd/WebContent/WEB-INF/lib/mail-1.4.7.jar"/>
 	<classpathentry kind="output" path="Web/Content/WEB-INF/classes"/>
 </classpath>
