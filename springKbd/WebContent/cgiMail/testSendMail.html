@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Google Mail Server</title>
+<script type="text/javascript">
+
+	function checkMail(){
+		console.log("checkMail() 진입 >>> : ");
+		
+		document.sendMailForm.action="/springKbd/cgiMail/testSendMail.jsp";
+		document.sendMailForm.method="POST";
+		document.sendMailForm.enctype="application/x-www-form-urlencoded";
+		document.sendMailForm.submit();
+	}
+</script>
+</head>
+<body>
+<h1>Google Mail Server 메일 보내기</h1>
+<hr>
+<form name="sendMailForm" id="sendMailForm">
+<table border="1">
+<tr>
+<td>제목</td>
+<td><input type="text" name="sendMailSubject" id="sendMailSubject" size="50"></td>
+</tr>
+<tr>
+<td>보내는 메일 : </td>
+<td><input type="text" name="sendMail" id="sendMail" size="50"></td>
+</tr>
+<tr>
+<td>비밀번호 : </td>
+<td><input type="password" name="sendPw" id="sendPw" size="50"></td>
+</tr>
+<tr>
+<td>내용 : </td>
+<td><textarea name="sendMsg" id="sendMsg" rows="5" cols="50"></textarea></td>
+</tr>
+<tr>
+<td align="center" colspan="2">
+<input type="button" value="메일보내기" onclick="checkMail();">
+<input type="reset" value="다시">
+</td>
+</tr>
+</table>
+</form>
+</body>
+</html>
